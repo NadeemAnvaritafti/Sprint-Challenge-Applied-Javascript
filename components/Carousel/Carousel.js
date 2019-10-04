@@ -49,17 +49,54 @@ function carouselCreator(){
   carousel.classList.add('carousel');
   Lbtn.classList.add('left-button');
   Rbtn.classList.add('right-button');
+  img1.classList.add('carousel-imgs');
+  img2.classList.add('carousel-imgs');
+  img3.classList.add('carousel-imgs');
+  img4.classList.add('carousel-imgs');
 
-
-
-  Rbtn.addEventListener('click', () => {
-    img1.style.display = 'flex';
+  Lbtn.addEventListener('click', ()=>{
+    changeImg(-1);
   })
 
+  Rbtn.addEventListener('click', ()=>{
+    changeImg(1);
+  })
 
   return carousel;
 }
 
-
 const carouselContainer = document.querySelector('.carousel-container');
 carouselContainer.appendChild(carouselCreator());
+
+
+
+
+// Carousel slideshow
+
+let index = 1;
+displayImgs(index);
+
+
+function changeImg(n) {
+  displayImgs(index += n);
+}
+
+function currentImg(n) {
+  displayImgs(index = n);
+}
+
+
+function displayImgs(n) {
+  let slides = document.getElementsByClassName("carousel-imgs");
+
+  if (n > slides.length) {
+    index = 1
+  }
+  if (n < 1) {
+    index = slides.length
+  }
+  for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  slides[index - 1].style.display = "block";
+}
